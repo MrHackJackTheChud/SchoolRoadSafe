@@ -1,0 +1,280 @@
+/* ---------- Road Ready — visual identity ----------
+   Palette:
+     asphalt   #2B2E33  (base dark)
+     asphalt-2 #1C1E22  (deeper shadow)
+     centreline #F4C430 (road markings / accent)
+     go-green  #3EA66D  (green light, success)
+     caution   #E8A33D  (amber light, warnings)
+     stop-red  #D64545  (red light, danger, lives)
+     paper     #FBF7EE  (panels, light text areas)
+   Type: 'Baloo 2' for display/headings (rounded, road-sign chunky),
+         system sans for HUD numbers and body copy (legible, fast to read).
+------------------------------------------------------ */
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap');
+
+:root {
+  --asphalt: #2B2E33;
+  --asphalt-2: #1C1E22;
+  --centreline: #F4C430;
+  --go-green: #3EA66D;
+  --caution: #E8A33D;
+  --stop-red: #D64545;
+  --paper: #FBF7EE;
+  --font-display: 'Baloo 2', system-ui, sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--asphalt-2);
+  font-family: var(--font-body);
+  color: var(--paper);
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* ---------- Shared screens / panels ---------- */
+
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel {
+  background: var(--paper);
+  color: var(--asphalt-2);
+  border-radius: 20px;
+  border: 4px solid var(--asphalt);
+  padding: 32px 28px;
+  max-width: 420px;
+  width: min(90vw, 420px);
+  text-align: center;
+  box-shadow: 0 12px 0 rgba(0,0,0,0.25);
+}
+
+.panel h1, .panel h2 {
+  font-family: var(--font-display);
+  margin: 0 0 8px;
+  letter-spacing: 0.5px;
+}
+
+.panel h1 { font-size: clamp(2rem, 8vw, 2.6rem); color: var(--asphalt-2); }
+.panel h1::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 6px;
+  background: var(--centreline);
+  border-radius: 3px;
+  margin: 10px auto 0;
+}
+
+.tagline { margin: 0 0 20px; font-size: 1rem; opacity: 0.85; }
+
+.howto-list {
+  text-align: left;
+  padding-left: 1.1em;
+  line-height: 1.55;
+  font-size: 0.95rem;
+}
+.howto-list li { margin-bottom: 10px; }
+
+.best-score { margin-top: 16px; font-size: 0.9rem; opacity: 0.75; }
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: block;
+  width: 100%;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  padding: 14px 20px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: transform 0.08s ease;
+}
+.btn:active { transform: translateY(2px); }
+.btn:focus-visible { outline: 3px solid var(--go-green); outline-offset: 2px; }
+
+.btn-primary {
+  background: var(--go-green);
+  color: white;
+  box-shadow: 0 5px 0 #2c7d54;
+}
+.btn-primary:active { box-shadow: 0 2px 0 #2c7d54; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--asphalt-2);
+  border: 3px solid var(--asphalt-2);
+}
+
+.icon-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 20;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(28,30,34,0.75);
+  color: var(--paper);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.icon-btn:focus-visible { outline: 3px solid var(--centreline); }
+
+/* ---------- Game screen ---------- */
+
+#screen-game { display: block; padding: 0; }
+
+#game-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: var(--asphalt);
+}
+
+#hud {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hud-chip {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  background: rgba(28,30,34,0.75);
+  padding: 6px 12px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+#loading-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  background: var(--asphalt-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#loading-overlay.hidden { display: none; }
+
+.loading-box { text-align: center; }
+.spinner {
+  width: 40px; height: 40px;
+  border: 5px solid rgba(244,196,48,0.25);
+  border-top-color: var(--centreline);
+  border-radius: 50%;
+  margin: 0 auto 14px;
+  animation: spin 0.9s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation-duration: 2.2s; }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- Touch controls ---------- */
+
+#touch-controls {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 18px;
+  pointer-events: none;
+}
+
+#wheel-zone, #pedal-zone { pointer-events: auto; }
+
+#steering-wheel {
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  border: 8px solid rgba(251,247,238,0.85);
+  background: rgba(28,30,34,0.55);
+  position: relative;
+  touch-action: none;
+  cursor: grab;
+}
+#steering-wheel:focus-visible { outline: 3px solid var(--centreline); }
+.wheel-spoke {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 6px; height: 40%;
+  background: rgba(251,247,238,0.85);
+  transform: translate(-50%, -100%);
+  border-radius: 3px;
+}
+
+#pedal-zone {
+  display: flex;
+  gap: 12px;
+}
+
+.pedal-btn {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: none;
+  color: white;
+  background: var(--stop-red);
+  box-shadow: 0 5px 0 #a53434;
+}
+.pedal-btn:active { box-shadow: 0 1px 0 #a53434; transform: translateY(4px); }
+.pedal-accel { background: var(--go-green); box-shadow: 0 5px 0 #2c7d54; }
+.pedal-accel:active { box-shadow: 0 1px 0 #2c7d54; }
+
+/* Hide touch controls on devices with a fine pointer (mouse) that also lack touch */
+@media (hover: hover) and (pointer: fine) {
+  #touch-controls { opacity: 0.9; }
+}
+
+/* ---------- Overlays (pause / game over) ---------- */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  background: rgba(28,30,34,0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.result-score {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--go-green);
+}
+
+[hidden] { display: none !important; }

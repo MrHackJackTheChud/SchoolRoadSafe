@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Road Ready — Road Safety Driving Game</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- Start screen -->
+    <section id="screen-start" class="screen" aria-label="Start screen">
+      <div class="panel">
+        <h1>Road Ready</h1>
+        <p class="tagline">Learn the rules. Watch the road. Get there safely.</p>
+        <button id="btn-start" class="btn btn-primary" autofocus>Start driving</button>
+        <button id="btn-howto" class="btn btn-ghost">How to play</button>
+        <p class="best-score" id="best-score-line" hidden>Best run: <span id="best-score-value">0</span> m</p>
+      </div>
+    </section>
+
+    <!-- How to play screen -->
+    <section id="screen-howto" class="screen" hidden aria-label="How to play">
+      <div class="panel">
+        <h2>How to play</h2>
+        <ul class="howto-list">
+          <li><strong>Steer:</strong> Arrow keys / A–D, or drag the on-screen wheel.</li>
+          <li><strong>Accelerate / Brake:</strong> Up/Down arrows, W/S, or the pedals on screen.</li>
+          <li><strong>The road winds</strong> left and right — keep steering to stay on it, or you'll run onto the verge.</li>
+          <li><strong>Obey the lights</strong> at intersections: stop on red and amber, go on green.</li>
+          <li><strong>Watch for pedestrians</strong> at crosswalks — always give way.</li>
+          <li><strong>Read the signs:</strong> school zones and speed signs lower your limit.</li>
+          <li><strong>Pause:</strong> press Space or tap the pause button anytime.</li>
+        </ul>
+        <button id="btn-howto-back" class="btn btn-primary">Got it</button>
+      </div>
+    </section>
+
+    <!-- Game screen -->
+    <section id="screen-game" class="screen" hidden aria-label="Game in progress">
+
+      <div id="hud" role="status" aria-live="polite">
+        <div class="hud-chip" id="hud-score">Distance: 0 m</div>
+        <div class="hud-chip" id="hud-speed">Speed: 0 km/h</div>
+        <div class="hud-chip" id="hud-lives">Lives: ❤️❤️❤️</div>
+      </div>
+
+      <button id="btn-pause" class="icon-btn" aria-label="Pause game">⏸</button>
+
+      <canvas id="game-canvas" role="img" aria-label="Top-down view of the road, your car, other traffic and pedestrians"></canvas>
+
+      <div id="loading-overlay">
+        <div class="loading-box">
+          <div class="spinner" aria-hidden="true"></div>
+          <p id="loading-text">Loading assets…</p>
+        </div>
+      </div>
+
+      <!-- Touch controls -->
+      <div id="touch-controls" aria-hidden="false">
+        <div id="wheel-zone">
+          <div id="steering-wheel" role="slider" aria-label="Steering wheel" aria-valuemin="-45" aria-valuemax="45" aria-valuenow="0" tabindex="0">
+            <div class="wheel-spoke"></div>
+          </div>
+        </div>
+        <div id="pedal-zone">
+          <button id="btn-brake" class="pedal-btn" aria-label="Brake">BRAKE</button>
+          <button id="btn-accel" class="pedal-btn pedal-accel" aria-label="Accelerate">GO</button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Pause overlay -->
+    <div id="overlay-pause" class="overlay" hidden>
+      <div class="panel">
+        <h2>Paused</h2>
+        <button id="btn-resume" class="btn btn-primary">Resume</button>
+        <button id="btn-quit" class="btn btn-ghost">Quit to menu</button>
+      </div>
+    </div>
+
+    <!-- Game over overlay -->
+    <div id="overlay-gameover" class="overlay" hidden>
+      <div class="panel">
+        <h2 id="gameover-title">Run complete</h2>
+        <p id="gameover-reason"></p>
+        <p class="result-score">Distance: <span id="final-score">0</span> m</p>
+        <button id="btn-retry" class="btn btn-primary">Try again</button>
+        <button id="btn-menu" class="btn btn-ghost">Main menu</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

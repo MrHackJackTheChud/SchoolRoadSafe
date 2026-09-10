@@ -1,0 +1,28 @@
+{
+  "images": {
+    "car_player":    { "file": "assets/car_player.png",   "w": 128, "h": 256, "anchor": [64, 200] },
+    "car_red":       { "file": "assets/car_red.png",       "w": 128, "h": 256, "anchor": [64, 200] },
+    "car_blue":      { "file": "assets/car_blue.png",      "w": 128, "h": 256, "anchor": [64, 200] },
+    "car_white":     { "file": "assets/car_white.png",     "w": 128, "h": 256, "anchor": [64, 200] },
+    "ped_walk":      { "file": "assets/ped_walk.png", "w": 384, "h": 64, "frames": 6, "frameSize": [64, 64], "anchor": [32, 56] },
+    "traffic_light": { "file": "assets/traffic_light_sprites.png", "frames": 4, "frameSize": [64, 160], "anchor": [32, 80] },
+    "sign_school40":  { "file": "assets/sign_school40.svg", "w": 128, "h": 128, "anchor": [64, 64] },
+    "sign_speed50":   { "file": "assets/sign_speed50.svg",  "w": 128, "h": 128, "anchor": [64, 64] },
+    "sign_giveway":   { "file": "assets/sign_giveway.svg",  "w": 128, "h": 128, "anchor": [64, 64] },
+    "sign_roundabout":{ "file": "assets/sign_roundabout.svg", "w": 128, "h": 128, "anchor": [64, 64] },
+    "steering_wheel": { "file": "assets/steering_wheel.png", "w": 512, "h": 512, "anchor": [256, 256] },
+    "house_01":       { "file": "assets/house_01.png", "w": 200, "h": 200 },
+    "house_02":       { "file": "assets/house_02.png", "w": 200, "h": 200 },
+    "shop_01":        { "file": "assets/shop_01.png",  "w": 220, "h": 200 },
+    "building_01":    { "file": "assets/building_01.png", "w": 256, "h": 320 },
+    "building_02":    { "file": "assets/building_02.png", "w": 256, "h": 320 }
+  },
+  "audio": {
+    "horn":       "assets/sfx/horn.ogg",
+    "brake":      "assets/sfx/brake.ogg",
+    "collision":  "assets/sfx/collision.ogg",
+    "ped_alert":  "assets/sfx/ped_alert.ogg",
+    "light_tick": "assets/sfx/light_tick.ogg",
+    "bg_loop":    "assets/music/bg_loop.ogg"
+  }
+}
